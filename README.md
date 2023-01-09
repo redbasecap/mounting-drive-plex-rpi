@@ -43,6 +43,7 @@ sudo chmod ugo+wx /mnt/exSSD/
 ```
 
 ### mount on startup
+First we need to find the 
 ```bash
 sudo blkid
 ```
@@ -54,11 +55,25 @@ Output:
 /dev/sdb1: LABEL="Media" UUID="63B1-F995" BLOCK_SIZE="512" TYPE="exfat" PARTUUID="2fb3af64-01"
 ```
 
+in my case the UUID is:
+```bash
+63B1-F995
+```
+
+we now need to make a change in the fstab file
 ```bash
 sudo nano /etc/fstab
 ```
 
-UUID=D632-BE5F /mnt/exdisk fstype defaults,auto,users,rw,nofail 0 0
-
+we append the line:
 ```bash
+UUID=63B1-F995 /mnt/exdisk fstype defaults,auto,users,rw,nofail 0 0
+```
+at the end of the file
+
+
+### if we use exFAT 
+first run:
+```bash
+sudo apt update && sudo apt install exfat-fuse exfat-utils
 ```
